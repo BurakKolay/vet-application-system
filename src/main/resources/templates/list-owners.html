@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Owners</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h2>List of Owners</h2>
+    <hr/>
+    <a th:href="@{/api/v1/owners/addOwnerForm}" class="btn btn-primary mb-2">Add Owner</a>
+    <table class="table table-striped" id="owner">
+
+        <thead>
+
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+        <tr th:each="owner: ${owners}">
+            <td th:text="${owner.id}"/>
+            <td th:text="${owner.firstName}"/>
+            <td th:text="${owner.lastName}"/>
+            <td th:text="${owner.mail}"/>
+            <td th:text="${owner.phoneNumber}"/>
+
+
+            <td>
+                <a th:href="@{/api/v1/owners/showUpdateForm(id=${owner.id})}" class="btn btn-info">Update</a>
+                <a th:href="@{/api/v1/owners/deleteOwnerForm(id=${owner.id})}" class="btn btn-info">Delete</a>
+                <a th:href="@{/api/v1/pet/addPetForm(id=${owner.id})}" class="btn btn-info">Add Pet</a>
+                <a th:href="@{/api/v1/pet/showOwnerPetsForm(id=${owner.id})}" class="btn btn-info">Show Pets</a>
+
+            </td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+<script>
+    $(document).ready(function (){
+        $("#owner").DataTable();
+    })
+</script>
+</body>
+</html>

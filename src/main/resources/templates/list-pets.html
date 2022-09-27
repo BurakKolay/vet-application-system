@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>List of Pets</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <h2>List of Pets</h2>
+  <hr/>
+  <a th:href="@{/api/v1/pet/addPetForm}" class="btn btn-primary mb-2">Add Pet</a>
+  <table class="table table-striped" id="pet-table">
+
+    <thead>
+
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Genus</th>
+      <th>Type</th>
+      <th>Age</th>
+      <th>Description</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+    <tr th:each="pet: ${pets}">
+      <td th:text="${pet.id}"/>
+      <td th:text="${pet.name}"/>
+      <td th:text="${pet.genus}"/>
+      <td th:text="${pet.type}"/>
+      <td th:text="${pet.age}"/>
+      <td th:text="${pet.description}"/>
+      <td>
+        <a th:href="@{/api/v1/pet/showPetUpdateForm(id=${pet.id})}" class="btn btn-info">Update</a>
+        <a th:href="@{/api/v1/pet/deletePetForm(id=${pet.id})}" class="btn btn-info">Delete</a>
+
+      </td>
+    </tr>
+
+    </tbody>
+
+  </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
+<script>
+  $(document).ready(function (){
+    $("#pet-table").DataTable();
+  })
+          </script>
+</body>
+</html>
